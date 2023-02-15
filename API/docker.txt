@@ -1,0 +1,17 @@
+docker build -t asakor/efalcon:1.3 .
+
+
+
+docker run -d --name efalcon  -p 8007:5005 asakor/efalcon:1.3
+
+
+docker stop efalcon
+
+docker rm efalcon
+
+
+docker push asakor/efalcon:1.3
+
+docker image pull asakor/efalcon:1.3
+
+

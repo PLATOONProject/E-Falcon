@@ -1,0 +1,5 @@
+class,altLabel
+https://w3id.org/platoon/DissipationAndResistivityFactor,"""DDF"""
+https://w3id.org/platoon/DissolvedGasAnalysis,"""DGA"""
+https://w3id.org/platoon/InterfacialTension,"""IFT"""
+https://w3id.org/platoon/OutOfRange,"""Shortcircuit or Open""@en"

@@ -1,0 +1,143 @@
+<html>
+<head>
+
+
+	<title>E-Falcon - Entity linking Framework for the Energy domain</title>
+	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="static/img/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="static/img/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="static/img/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="static/img/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="static/img/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="static/img/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="static/img/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="static/img/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="static/img/favicon/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="static/css/style.css?v=1.1" rel="stylesheet">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.json-editor.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+<script>
+if(document.URL.charAt(document.URL.length-1)!="/")
+	{
+		window.location.replace(document.URL+"/");
+	}		
+	</script>
+
+</head>
+<body>
+<div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">E-Falcon</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Demo</a></li>
+      <li><a href="api-use">API</a></li>
+      <li><a href="description">About Us</a></li>
+    </ul>
+  </div>
+</nav>
+<div>
+
+	</div>
+		<div class="row examples">
+         <div id="ex1">Wind Farms consist of many wind turbines</div>
+	</div>
+	<div class="row" >
+		<div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                 <textarea id="text" class="form-control" placeholder="Type what you wanna E-Falcon to catch"  style="width: 100%;height: 175px;"> </textarea>
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                       
+                        <button id="search" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+	</div>
+
+    <div class="row" id="results"> 
+    </div>
+    </div>
+<script>
+
+$(document).ready(function(){
+    $("#ex1").click(function(){
+		call_example($("#ex1").html());
+    });
+});
+$(document).ready(function(){
+    $("#ex2").click(function(){
+		call_example($("#ex2").html());
+    });
+});
+function call_example(text){
+   $("#text").val(text) 
+}
+function call(){
+         domain=document.URL;
+         mode="long";
+		text=$('#text').val()
+		$('#results').html('<div class="loader"></div>')
+        $.ajax({
+        type: "POST",
+        url: domain+"api?mode="+mode, 
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ "text": text }),
+        success: function(result){
+            if (result['entities']==-1)
+            {
+                $("#results").html('<p style="text-align:center">no results !</p>');
+            }else{
+            $('#results').html('<pre id="json-display"></pre>')
+            var editor = new JsonEditor('#json-display', result);
+  
+            }
+            },
+        dataType: "json"
+        });
+}
+$(document).ready(function(){
+    $("#search").click(function(){
+		call();
+    });
+});
+
+$('#text').keydown(function (e){
+    if(e.keyCode == 13){
+       call();
+    }
+})
+</script>
+<footer>
+    <hr>
+    <div class="footer-img" style="text-align: center;">
+      <img src="static/img/TIB_Logo_en.png" alt="German National Library of Science and Technology"  width="200" style="margin-right: 20px;">
+      <img src="static/img/Platoon-logo-white-bg.png" alt="PLATOON EU Project" width="200" style="margin-right: 20px;">
+    </div>
+    <hr>
+    <p>developed by <a href='https://twitter.com/Ahmad_Sakor'>Ahmad Sakor</a> at the <a href='https://www.tib.eu/de/forschung-entwicklung/forschungsgruppen-und-labs/scientific-data-management'>Scientific Data Management Group</a></p>
+		<hr>
+	<p>
+	<a href='https://www.tib.eu/en/service/imprint'>Imprint</a>
+	<a href='https://www.tib.eu/en/service/terms-of-use'>Term of use</a>
+	<a href='https://www.tib.eu/en/accessibility-statement'>Accessibility Statement</a>
+	<a href='https://www.tib.eu/en/accessibility-statement'>Data Protection</a>
+	</p>
+  </footer>
+	</body>
+</html>
