@@ -2,7 +2,7 @@
 
 E-Falcon recognizes entities in a natural language text and links them to their corresponding PLATOON semantic data models.
 
-E-Falcon is avaiable as an online API with a demo interface [https://labs.tib.eu/sdm/efalcon/](Demo)
+E-Falcon is avaiable as an online API with a demo interface [Demo](https://labs.tib.eu/sdm/efalcon/)
 
 Here is an example on how to use the API via cURL request
 
